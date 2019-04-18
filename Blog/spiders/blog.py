@@ -27,11 +27,10 @@ class BlogSpider(scrapy.Spider):
     def parse(self, response):
         print("Response Type >>> ", type(response))
         rows = response.xpath("//div[@class='post-listing']//div[@class='post-item']")
-        print("Ready TO LOOP")
+        
         print("count >> ", rows.__len__())
         for row in rows:
             item = BlogItem()
-            print("Inside LOOP")
 
             item['title'] = row.xpath('div[@class="post-header"]/h2/a/text()').extract_first()
             item['blogUrl'] = row.xpath('div[@class="post-header"]/h2/a/@href').extract_first()
@@ -53,7 +52,7 @@ class BlogSpider(scrapy.Spider):
 
     '''Using CSS Selectors'''
     '''
-    def parseCSS(self, response):
+    def parse(self, response):
         print("Response Type >>> ", type(response))
         rows = response.css(".post-item")
 
